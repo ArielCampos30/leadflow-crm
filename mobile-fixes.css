@@ -1,0 +1,143 @@
+/* Ajustes responsivos específicos para evitar desbordes y anchos falsos en móvil. */
+
+@media (max-width: 1180px) {
+  .app-main,
+  main,
+  .view,
+  .dashboard-grid,
+  .panel,
+  .pipeline-preview-panel,
+  .task-panel,
+  .recent-panel,
+  .leads-panel {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .mini-pipeline {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .app-shell,
+  .app-main,
+  .topbar,
+  main,
+  .view,
+  .dashboard-grid,
+  .panel,
+  .recent-panel,
+  .leads-panel,
+  .task-panel,
+  .pipeline-preview-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .app-main {
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    left: 0;
+    right: 0;
+  }
+
+  .pipeline-preview-panel {
+    overflow: hidden;
+  }
+
+  .mini-pipeline {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  .mini-stage {
+    flex: 0 0 145px;
+    min-width: 145px;
+  }
+
+  .table-wrap,
+  .pipeline-board {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 620px) {
+  main {
+    padding-inline: 14px;
+  }
+
+  .topbar {
+    padding-inline: 14px;
+  }
+
+  .page-heading {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .kpi-grid {
+    width: 100%;
+  }
+
+  .kpi-card {
+    min-width: 0;
+  }
+
+  .panel {
+    border-radius: 16px;
+  }
+
+  .pipeline-preview-panel,
+  .task-panel,
+  .recent-panel,
+  .leads-panel {
+    padding: 16px;
+  }
+
+  .recent-panel .panel-head {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .recent-panel .table-wrap {
+    margin-inline: -2px;
+  }
+
+  .search-box {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar-actions {
+    flex-shrink: 0;
+  }
+}
