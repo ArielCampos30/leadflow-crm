@@ -1,4 +1,4 @@
-/* Ajustes responsivos específicos para evitar desbordes y anchos falsos en móvil. */
+/* Ajustes responsivos para que el CRM no desborde la pantalla completa. */
 
 @media (max-width: 1180px) {
   .app-main,
@@ -34,7 +34,12 @@
     overflow-x: hidden;
   }
 
-  .app-shell,
+  .app-shell {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   .app-main,
   .topbar,
   main,
@@ -59,6 +64,11 @@
     right: 0;
   }
 
+  .kpi-grid,
+  .kpi-card {
+    min-width: 0;
+  }
+
   .pipeline-preview-panel {
     overflow: hidden;
   }
@@ -73,11 +83,14 @@
     overscroll-behavior-inline: contain;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
+    scroll-snap-type: x proximity;
+    padding-bottom: 6px;
   }
 
   .mini-stage {
     flex: 0 0 145px;
     min-width: 145px;
+    scroll-snap-align: start;
   }
 
   .table-wrap,
@@ -87,6 +100,20 @@
     min-width: 0;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-inline: contain;
+  }
+
+  .pipeline-board {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82vw, 320px);
+    scroll-snap-type: x proximity;
+  }
+
+  .pipeline-column {
+    min-width: 0;
+    min-height: auto;
+    scroll-snap-align: start;
   }
 }
 
@@ -106,10 +133,20 @@
 
   .kpi-grid {
     width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .kpi-card {
+    width: 100%;
     min-width: 0;
+    overflow: hidden;
+  }
+
+  .kpi-card strong,
+  .kpi-card span,
+  .kpi-card small {
+    overflow-wrap: anywhere;
   }
 
   .panel {
@@ -128,8 +165,79 @@
     align-items: center;
   }
 
-  .recent-panel .table-wrap {
-    margin-inline: -2px;
+  .recent-panel .table-wrap,
+  .leads-panel .table-wrap {
+    overflow: visible;
+    margin: 0;
+  }
+
+  .recent-panel table,
+  .leads-panel table {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .recent-panel thead,
+  .leads-panel thead {
+    display: none;
+  }
+
+  .recent-panel tbody,
+  .leads-panel tbody {
+    display: grid;
+    gap: 10px;
+  }
+
+  .recent-panel tbody tr,
+  .leads-panel tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px 14px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-2);
+  }
+
+  .recent-panel tbody td,
+  .leads-panel tbody td {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .recent-panel tbody td:first-child,
+  .leads-panel tbody td:first-child {
+    grid-column: 1 / -1;
+    padding-bottom: 4px;
+  }
+
+  .recent-panel tbody td:nth-child(2)::before { content: "Empresa"; }
+  .recent-panel tbody td:nth-child(3)::before { content: "Etapa"; }
+  .recent-panel tbody td:nth-child(4)::before { content: "Valor"; }
+  .recent-panel tbody td:nth-child(5)::before { content: "Próximo paso"; }
+
+  .leads-panel tbody td:nth-child(2)::before { content: "Empresa"; }
+  .leads-panel tbody td:nth-child(3)::before { content: "Origen"; }
+  .leads-panel tbody td:nth-child(4)::before { content: "Etapa"; }
+  .leads-panel tbody td:nth-child(5)::before { content: "Valor"; }
+  .leads-panel tbody td:nth-child(6)::before { content: "Seguimiento"; }
+
+  .recent-panel tbody td:nth-child(n+2)::before,
+  .leads-panel tbody td:nth-child(n+2)::before {
+    display: block;
+    margin-bottom: 4px;
+    color: #98a2b3;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+
+  .leads-panel tbody td:last-child {
+    grid-column: 1 / -1;
   }
 
   .search-box {
@@ -139,5 +247,11 @@
 
   .topbar-actions {
     flex-shrink: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .kpi-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
