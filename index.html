@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LeadFlow CRM: demo de portfolio para gestión de leads, oportunidades, tareas y seguimiento comercial.">
+  <meta name="theme-color" content="#101828">
+  <title>LeadFlow CRM | Demo de portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Saltar al contenido</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">LF</div>
+        <div>
+          <strong>LeadFlow</strong>
+          <span>CRM comercial</span>
+        </div>
+      </div>
+
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="dashboard" type="button">
+          <span class="nav-icon" aria-hidden="true">⌂</span>
+          <span>Dashboard</span>
+        </button>
+        <button class="nav-item" data-view="pipeline" type="button">
+          <span class="nav-icon" aria-hidden="true">▦</span>
+          <span>Pipeline</span>
+        </button>
+        <button class="nav-item" data-view="leads" type="button">
+          <span class="nav-icon" aria-hidden="true">◎</span>
+          <span>Leads</span>
+        </button>
+        <button class="nav-item" data-view="tasks" type="button">
+          <span class="nav-icon" aria-hidden="true">✓</span>
+          <span>Tareas</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="sidebar-card-label">Demo de portfolio</span>
+        <strong>Datos ficticios</strong>
+        <p>La información se guarda localmente en este navegador para demostrar el funcionamiento.</p>
+      </div>
+
+      <div class="sidebar-user">
+        <div class="user-avatar">AC</div>
+        <div>
+          <strong>Administrador</strong>
+          <span>Portfolio Demo</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobile-menu" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <span class="sr-only">Buscar leads</span>
+          <input id="global-search" type="search" placeholder="Buscar cliente, empresa o email..." autocomplete="off">
+        </label>
+
+        <div class="topbar-actions">
+          <div class="demo-badge"><span></span> Demo activa</div>
+          <button class="primary-btn" id="open-lead-modal" type="button">+ Nuevo lead</button>
+        </div>
+      </header>
+
+      <main id="main-content">
+        <section class="view active" id="dashboard-view" data-view-panel="dashboard">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow">Resumen comercial</span>
+              <h1>Buen día. Este es tu pipeline.</h1>
+              <p>Seguimiento rápido de oportunidades, tareas y próximos pasos.</p>
+            </div>
+            <div class="date-pill" id="today-label"></div>
+          </div>
+
+          <div class="kpi-grid" id="kpi-grid" aria-label="Indicadores comerciales"></div>
+
+          <div class="dashboard-grid">
+            <section class="panel pipeline-preview-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="panel-kicker">Embudo</span>
+                  <h2>Pipeline de oportunidades</h2>
+                </div>
+                <button class="text-btn" data-go-view="pipeline" type="button">Ver pipeline completo →</button>
+              </div>
+              <div class="mini-pipeline" id="mini-pipeline"></div>
+            </section>
+
+            <aside class="panel task-panel">
+              <div class="panel-head compact">
+                <div>
+                  <span class="panel-kicker">Prioridad</span>
+                  <h2>Tareas próximas</h2>
+                </div>
+                <button class="icon-btn" id="add-task-btn" type="button" aria-label="Agregar tarea">+</button>
+              </div>
+              <div class="task-list" id="dashboard-task-list"></div>
+            </aside>
+          </div>
+
+          <section class="panel recent-panel">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Actividad</span>
+                <h2>Leads recientes</h2>
+              </div>
+              <button class="text-btn" data-go-view="leads" type="button">Ver todos →</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Contacto</th>
+                    <th>Empresa</th>
+                    <th>Etapa</th>
+                    <th>Valor</th>
+                    <th>Próximo paso</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-leads-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="pipeline-view" data-view-panel="pipeline">
+          <div class="page-heading inline-heading">
+            <div>
+              <span class="eyebrow">Gestión visual</span>
+              <h1>Pipeline comercial</h1>
+              <p>Arrastrá oportunidades entre etapas o avanzalas desde cada tarjeta.</p>
+            </div>
+            <div class="pipeline-summary" id="pipeline-summary"></div>
+          </div>
+          <div class="pipeline-board" id="pipeline-board"></div>
+        </section>
+
+        <section class="view" id="leads-view" data-view-panel="leads">
+          <div class="page-heading inline-heading">
+            <div>
+              <span class="eyebrow">Base comercial</span>
+              <h1>Leads y oportunidades</h1>
+              <p>Todos los contactos comerciales en una sola vista.</p>
+            </div>
+            <label class="filter-field">
+              <span>Filtrar etapa</span>
+              <select id="stage-filter">
+                <option value="all">Todas</option>
+                <option value="new">Nuevo</option>
+                <option value="contacted">Contactado</option>
+                <option value="proposal">Presupuesto</option>
+                <option value="negotiation">Negociación</option>
+                <option value="won">Ganado</option>
+                <option value="lost">Perdido</option>
+              </select>
+            </label>
+          </div>
+
+          <section class="panel leads-panel">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Contacto</th>
+                    <th>Empresa</th>
+                    <th>Origen</th>
+                    <th>Etapa</th>
+                    <th>Valor</th>
+                    <th>Seguimiento</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="all-leads-body"></tbody>
+              </table>
+            </div>
+            <div class="empty-state" id="leads-empty" hidden>
+              <strong>No encontramos resultados.</strong>
+              <span>Probá con otra búsqueda o etapa.</span>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="tasks-view" data-view-panel="tasks">
+          <div class="page-heading inline-heading">
+            <div>
+              <span class="eyebrow">Seguimiento</span>
+              <h1>Tareas comerciales</h1>
+              <p>Organizá llamadas, reuniones y recordatorios pendientes.</p>
+            </div>
+            <button class="primary-btn" id="open-task-modal" type="button">+ Nueva tarea</button>
+          </div>
+          <div class="task-board" id="task-board"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="lead-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+      <div class="modal-head">
+        <div>
+          <span class="panel-kicker">Nueva oportunidad</span>
+          <h2 id="lead-modal-title">Agregar lead</h2>
+        </div>
+        <button class="icon-btn modal-close" type="button" data-close-modal="lead-modal" aria-label="Cerrar">×</button>
+      </div>
+      <form id="lead-form" class="modal-form">
+        <div class="form-grid">
+          <label>Nombre y apellido<input name="name" required autocomplete="name"></label>
+          <label>Empresa<input name="company" required autocomplete="organization"></label>
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+          <label>Teléfono<input name="phone" type="tel" required autocomplete="tel"></label>
+          <label>Valor estimado<input name="amount" type="number" min="0" step="1000" required></label>
+          <label>Origen
+            <select name="source" required>
+              <option value="Web">Web</option>
+              <option value="Referido">Referido</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="Contacto directo">Contacto directo</option>
+            </select>
+          </label>
+          <label>Etapa
+            <select name="stage" required>
+              <option value="new">Nuevo</option>
+              <option value="contacted">Contactado</option>
+              <option value="proposal">Presupuesto</option>
+              <option value="negotiation">Negociación</option>
+            </select>
+          </label>
+          <label>Próximo seguimiento<input name="dueDate" type="date" required></label>
+        </div>
+        <label>Próximo paso<input name="nextAction" required placeholder="Ej: Llamar para revisar propuesta"></label>
+        <div class="modal-actions">
+          <button class="secondary-btn" type="button" data-close-modal="lead-modal">Cancelar</button>
+          <button class="primary-btn" type="submit">Guardar lead</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="task-modal" hidden>
+    <section class="modal modal-small" role="dialog" aria-modal="true" aria-labelledby="task-modal-title">
+      <div class="modal-head">
+        <div>
+          <span class="panel-kicker">Seguimiento</span>
+          <h2 id="task-modal-title">Nueva tarea</h2>
+        </div>
+        <button class="icon-btn modal-close" type="button" data-close-modal="task-modal" aria-label="Cerrar">×</button>
+      </div>
+      <form id="task-form" class="modal-form">
+        <label>Tarea<input name="title" required placeholder="Ej: Llamar a cliente"></label>
+        <label>Fecha<input name="date" type="date" required></label>
+        <label>Prioridad
+          <select name="priority">
+            <option value="high">Alta</option>
+            <option value="medium" selected>Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button class="secondary-btn" type="button" data-close-modal="task-modal">Cancelar</button>
+          <button class="primary-btn" type="submit">Guardar tarea</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
